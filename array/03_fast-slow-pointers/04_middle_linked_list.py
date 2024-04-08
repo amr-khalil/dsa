@@ -25,23 +25,8 @@ class Node(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-        
-def middleNode1(head):
-    node = head
-    length = 0
-
-    while node:
-        length += 1
-        node = node.next
-
-    mid = length // 2
-
-    node = head
-    for _ in range(mid):
-        node = node.next
-    return node.val
     
-def middleNode2(head):
+def middleNode(head):
     """
     :type head: Node
     :rtype: int
@@ -59,7 +44,7 @@ if __name__ == "__main__":
     head.next.next = Node(3)
     head.next.next.next = Node(4)
     head.next.next.next.next = Node(5)
-    print(middleNode1(head))
+    print(middleNode(head))
     
     head = Node(1)
     head.next = Node(2)
@@ -67,9 +52,4 @@ if __name__ == "__main__":
     head.next.next.next = Node(4)
     head.next.next.next.next = Node(5)
     head.next.next.next.next.next = Node(6)
-    print(middleNode2(head))
-    
-    
-
-
-
+    print(middleNode(head))

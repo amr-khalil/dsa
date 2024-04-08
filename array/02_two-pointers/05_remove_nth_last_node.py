@@ -54,7 +54,7 @@ def removeNthFromEnd(head, n):
     
     # move fast and slow pointers
     while fast.next:
-        fast = fast.next
+        fast = fast.next # move fast only one step
         slow = slow.next
     
     # delete

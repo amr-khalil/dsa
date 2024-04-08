@@ -26,20 +26,35 @@ Constraints:
 1 <= n <= 231 - 1
 """
 
+
 def happy_number(n):
     """
-    Time complexity: O(logn)
+    Time complexity: O(log n)
     Space complexity: O(1)
     """
     def get_next(n):
-        total_sum = 0
-        while n > 0:
-            n, digit = divmod(n, 10)
-            total_sum += digit ** 2
-        return total_sum
+        n = sum([int(i)**2 for i in str(n)])
+        return n
 
     slow, fast = n, get_next(n)
     while fast != 1 and slow != fast:
         slow = get_next(slow)
         fast = get_next(get_next(fast))
     return fast == 1
+
+
+def happy_number2(n):
+    seen = set()
+    while n != 1:
+        n = sum([int(i)**2 for i in str(n)])
+        if n in seen:
+            return False
+        seen.add(n)
+    return True
+
+if __name__ == "__main__":
+    print(happy_number(19))  # True
+    print(happy_number(2))  # False
+    print(happy_number(7))  # True
+    print(happy_number(1111111))  # True
+    print(happy_number(11111111))  # False
