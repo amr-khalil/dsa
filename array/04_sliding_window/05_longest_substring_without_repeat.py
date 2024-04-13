@@ -64,4 +64,3 @@ if __name__ == '__main__':
     print(lengthOfLongestSubstring(s))  # 2
     s = "dvdf"
     print(lengthOfLongestSubstring(s))  # 3
-    s = "abba"
