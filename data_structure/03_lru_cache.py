@@ -39,34 +39,39 @@ Constraints:
 At most 2 * 105 calls will be made to get and put.
 """
 
-
-import collections
-
-
 class LRUCache:
-    def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.cache = {}
+    """
+    time complexity: O(1)
+    space complexity: O(size)
+    """
+    def __init__(self, size: int):
+        self.size = size
+        self.dic = {}
         self.order = []
+        
+    def put(self, key: int, value: int) -> None:
+        
+        # case 0: if the key is in the cache, remove it
+        if key in self.dic:
+            self.order.remove(key)
+        # case 1: if the cache is full, remove the least recently used key
+        elif len(self.dic) >= self.size:
+            del self.dic[self.order.pop(0)]
+            
+        # case1: add or update the key
+        self.dic[key] = value
+        self.order.append(key)
 
     def get(self, key: int) -> int:
-        if key in self.cache:
-            self.order.remove(key)
-            self.order.append(key)
-            return self.cache[key]
-        return -1
-
-    def put(self, key: int, value: int) -> None:
-        if key in self.cache:
-            self.order.remove(key)
-        elif len(self.cache) >= self.capacity:
-            del self.cache[self.order.pop(0)]
-        self.cache[key] = value
+        # case 1: if the key is not in the cache, return -1 
+        if key not in self.dic:
+            return -1
+        # case 2: update the order
+        self.order.remove(key)
         self.order.append(key)
-        
-# Time complexity: O(1)
-# Space complexity: O(n)
+        return self.dic[key]
 
+import collections
 class LRUCache2:
     def __init__(self, capacity: int):
         self.capacity = capacity
