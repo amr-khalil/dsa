@@ -77,13 +77,6 @@ class LRUCache2:
         self.capacity = capacity
         self.cache = collections.OrderedDict()
 
-    def get(self, key: int) -> int:
-        if key not in self.cache:
-            return -1
-
-        self.cache.move_to_end(key)
-        return self.cache[key]
-
     def put(self, key: int, value: int) -> None:
         if key in self.cache:
             self.cache.move_to_end(key)
@@ -93,6 +86,13 @@ class LRUCache2:
             self.cache.popitem(False)
             
         print(self.cache)
+        
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+
+        self.cache.move_to_end(key)
+        return self.cache[key]
             
 if __name__ == '__main__':
     lRUCache = LRUCache2(2)
